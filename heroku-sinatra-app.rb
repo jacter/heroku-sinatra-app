@@ -13,12 +13,12 @@ configure :production do
   # only be run at Heroku at boot
 
   # TIP:  You can get you database information
-  #       from ENV['DATABASE_URI'] (see /env route below)
+  #       from ENV['DATABASE_URL'] (see /env route below)
 end
 
 # Quick test
 get '/' do
-  "Congradulations!
+  "Congratulations!
    You're running a Sinatra application on Heroku!"
 end
 
