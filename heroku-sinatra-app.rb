@@ -7,6 +7,7 @@
 #
 require 'rubygems'
 require 'sinatra'
+require 'dm-core'
 
 configure :production do
   # Configure stuff here you'll want to
@@ -14,7 +15,19 @@ configure :production do
 
   # TIP:  You can get you database information
   #       from ENV['DATABASE_URL'] (see /env route below)
+  DataMapper::setup(:default, ENV['DATABASE_URL'])
 end
+
+configure :development do
+  DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/database.sqlite3")
+end
+
+class Bacon
+  include DataMapper::Resource
+  property :id, Serial
+end
+
+DataMapper.auto_upgrade!
 
 # Quick test
 get '/' do
